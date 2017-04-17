@@ -15,10 +15,10 @@ public class Eq
 
 		String[] text = uravn.split(" ");
 		int i = text.length;
-		int[] num = new int[i];
+		//int[] num = new int[i];
 		int result = 0;
 		String[] simv = {"+", "-", "*", "/", "(", ")"};
-		int operation = 0;
+		int operation =0;
 		int numb1 = 0;
 		int numb2 = 0;
 		for (i = 0; i <= text.length - 1; i++) {
@@ -32,36 +32,48 @@ public class Eq
 					numb2 = Integer.parseInt(text[i]);
 				}
 			}
-				else {
-					if (p1.equals(simv[0])) {
-						operation = 0;
-					}
-					if (p1.equals(simv[1])) {
-						operation = 1;
-					}
-					if (p1.equals(simv[2])) {
-						operation = 2;
-					}
-					if (p1.equals(simv[3])) {
-						operation = 3;
-					}
-				}
+			else if (p1 == (simv[0])){
+				System.out.println("perv oper eto plus");
+				operation = 0;
+			}
+			else if (p1.equals(simv[1])) {
+				System.out.println("perv oper eto minus");
+				operation = 1;
+			}
+			else if (p1.equals(simv[2])) {
+				System.out.println("perv oper eto umnog");
+				operation = 2;
+			}
+			else if (p1.equals(simv[3])) {
+				System.out.println("perv oper eto delenie");
+				operation = 3;
+			}
+			else {
+				System.out.println("vse juynya");
+			}
+			
 
 			switch (operation) {
-				case 1:
+				case 0:
 					result = result + numb2;
+					System.out.println("oper eto plus");
+					break;
+				case 1:
+					result = result - numb2;
+					System.out.println("oper eto minus");
 					break;
 				case 2:
-					result = result - numb2;
+					result = result * numb2;
+					System.out.println("oper eto umnog");
 					break;
 				case 3:
-					result = result * numb2;
-					break;
-				case 4:
 					result = result / numb2;
+					System.out.println("oper eto delenie");
 					break;
+				//int numb2 = 0;
 			}
 		}
+
 		System.out.println(result);
 		System.out.println("exit? y/n");
 		exit = in.next();
