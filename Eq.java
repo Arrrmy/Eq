@@ -1,5 +1,6 @@
 import java.util.*; 
 import java.io.*;
+
 public class Eq
 { 
 	public static void main(String[] args) 
@@ -8,7 +9,7 @@ public class Eq
 	do {
 		Scanner in = new Scanner(System.in);
 		String uravn;
-		System.out.print("vvedite text");
+		System.out.print("vvedite text: ");
 		uravn = in.nextLine();
 		System.out.println();
 
@@ -23,10 +24,9 @@ public class Eq
 		for (i = 0; i <= text.length - 1; i++) {
 			String p1 = new String(text[i]);
 			if (!p1.equals(simv)) {
-				if (numb1.equals(0)) {
+				if (numb1 == 0) {
 					numb1 = Integer.parseInt(text[i]);
 					result = numb1;
-					//ssss
 				}
 				else {
 					numb2 = Integer.parseInt(text[i]);
