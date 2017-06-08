@@ -1,85 +1,113 @@
-import java.util.*; 
+import java.util.*;
 import java.io.*;
 
-public class Eq
-{ 
-	public static void main(String[] args) 
-	{ 
-	String exit;
-	do {
-		Scanner in = new Scanner(System.in);
-		String uravn;
-		System.out.print("vvedite text: ");
-		uravn = in.nextLine();
-		System.out.println();
+public class Eq {
 
-		String[] text = uravn.split(" ");
-		int i = text.length;
-		//int[] num = new int[i];
-		int result = 0;
-		String[] simv = {"+", "-", "*", "/", "(", ")"};
-		int operation =0;
-		int numb1 = 0;
-		int numb2 = 0;
-		for (i = 0; i <= text.length - 1; i++) {
-			String p1 = new String(text[i]);
-			if (!p1.equals(simv)) {
-				if (numb1 == 0) {
-					numb1 = Integer.parseInt(text[i]);
-					result = numb1;
-				}
-				else {
-					numb2 = Integer.parseInt(text[i]);
-				}
-			}
-			else if (p1 == (simv[0])){
-				System.out.println("perv oper eto plus");
-				operation = 0;
-			}
-			else if (p1.equals(simv[1])) {
-				System.out.println("perv oper eto minus");
-				operation = 1;
-			}
-			else if (p1.equals(simv[2])) {
-				System.out.println("perv oper eto umnog");
-				operation = 2;
-			}
-			else if (p1.equals(simv[3])) {
-				System.out.println("perv oper eto delenie");
-				operation = 3;
-			}
-			else {
-				System.out.println("vse juynya");
-			}
-			
+  public static void main(String[] args) {
+    int result = 0;
+    int len=0;
+    int i=0;
+    String exit;
+    do {
+      String[] text= skanText();
+      len = text.length;
+      String operPlus = "+";
+      String operMinus = "-";
+      String operMult = "*";
+      String operDevo = "/";
+      for ( i = 0; i <= len-1; i++) {
+        if (text[i].equals(operMult)) {
+          result = mult(i, result, text);
+          text = change(i, len, result, text);
+          i=0;
+        }
+        else if (text[i].equals(operDevo)) {
+          result = devo(i, result, text);
+          text = change(i, len, result, text);
+          i=0;
+        }
+      }
+      for ( i = 0; i <= len-1; i++) {
+        if (text[i].equals(operPlus)) {
+          result = plus(i, result, text);
+          System.out.println("posle plus=" + result);
+          text = change(i, len, result, text);
+          i = 0;
+        }
+        else if (text[i].equals(operMinus)){
+          result = minus(i, result, text);
+          text = change(i, len, result, text);
+          i = 0;
+        }
+        else {
+          System.out.println ("resuuuuult= " + text [i]);
+        }
+          /*else {
+            i++;
+          }*/
+      }
 
-			switch (operation) {
-				case 0:
-					result = result + numb2;
-					System.out.println("oper eto plus");
-					break;
-				case 1:
-					result = result - numb2;
-					System.out.println("oper eto minus");
-					break;
-				case 2:
-					result = result * numb2;
-					System.out.println("oper eto umnog");
-					break;
-				case 3:
-					result = result / numb2;
-					System.out.println("oper eto delenie");
-					break;
-				//int numb2 = 0;
-			}
-		}
 
-		System.out.println(result);
-		System.out.println("exit? y/n");
-		exit = in.next();
-	}
-	while (exit.equals("n"));
 
-	}
-} 
-	
+      System.out.print("result= ");
+      System.out.println(result);
+      Scanner ex = new Scanner(System.in);
+      System.out.println("exit? y/n");
+      exit = ex.next();
+      }
+    while (exit.equals("n"));
+
+  }
+
+  public static String[] skanText() {
+    Scanner in = new Scanner(System.in);
+    System.out.print("vvedite text: ");
+    String uravn = in.nextLine();
+    System.out.println();
+    String[] textik =  uravn.split(" ");
+    return textik;
+  }
+  public static String[] change(int i, int len, int result, String[] textok) {
+    textok[i-1] = Integer.toString(result);
+    if (len>3){
+      for (int n = i;  n <= len-3; n++){
+        textok[n] = textok[n + 2];
+      }
+      textok[len-1]=Integer.toString(0);
+      textok[len-2]=Integer.toString(0);
+    }
+    else{
+      textok[len-1]=Integer.toString(0);
+      textok[len-2]=Integer.toString(0);
+    }
+    return textok;
+    }
+
+    public static int plus(int i, int result, String[] text) {
+    int numb1 = Integer.parseInt(text[i-1]);
+    int numb2 = Integer.parseInt(text[i+1]);
+    result = numb1 + numb2;
+    return result;
+  }
+  public static int minus(int i, int result, String[] text) {
+    int numb1 = Integer.parseInt(text[i - 1]);
+    int numb2 = Integer.parseInt(text[i + 1]);
+    result = numb1 - numb2;
+    return result;
+  }
+
+  public static int mult(int i, int result, String[] text) {
+    int numb1 = Integer.parseInt(text[i - 1]);
+    int numb2 = Integer.parseInt(text[i + 1]);
+    result = numb1 * numb2;
+    return result;
+  }
+  public static int devo(int i, int result, String[] text) {
+    int numb1 = Integer.parseInt(text[i - 1]);
+    int numb2 = Integer.parseInt(text[i + 1]);
+    result = numb1 / numb2;
+    return result;
+  }
+
+
+}
