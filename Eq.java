@@ -15,36 +15,34 @@ public class Eq {
       String operMinus = "-";
       String operMult = "*";
       String operDevo = "/";
-      for ( i = 0; i <= len-1; i++) {
-        if (text[i].equals(operMult)) {
-          result = mult(i, result, text);
-          text = change(i, len, result, text);
-          i=0;
+      for ( int opPerv = 0; opPerv <= len-1; opPerv++) {
+        if (text[opPerv].equals(operMult)) {
+          result = mult(opPerv, text);
+	System.out.println("posle umnogenia=" + result);
+          text = change(opPerv, len, result, text);
+          opPerv=0;
         }
-        else if (text[i].equals(operDevo)) {
-          result = devo(i, result, text);
-          text = change(i, len, result, text);
-          i=0;
+        else if (text[opPerv].equals(operDevo)) {
+          result = devo(opPerv, text);
+	System.out.println("posle delenia=" + result);
+          text = change(opPerv, len, result, text);
+          opPerv=0;
         }
       }
-      for ( i = 0; i <= len-1; i++) {
-        if (text[i].equals(operPlus)) {
-          result = plus(i, result, text);
+      for ( int opVtor = 0; opVtor <= len-1; opVtor++) {
+        if (text[opVtor].equals(operPlus)) {
+          result = plus(opVtor, text);
           System.out.println("posle plus=" + result);
-          text = change(i, len, result, text);
-          i = 0;
+          text = change(opVtor, len, result, text);
+          opVtor = 0;
         }
-        else if (text[i].equals(operMinus)){
-          result = minus(i, result, text);
-          text = change(i, len, result, text);
-          i = 0;
+        else if (text[opVtor].equals(operMinus)){
+          result = minus(opVtor, text);
+	System.out.println("posle minus=" + result);
+          text = change(opVtor, len, result, text);
+          opVtor = 0;
         }
-        else {
-          System.out.println ("resuuuuult= " + text [i]);
-        }
-          /*else {
-            i++;
-          }*/
+        
       }
 
 
@@ -73,40 +71,32 @@ public class Eq {
       for (int n = i;  n <= len-3; n++){
         textok[n] = textok[n + 2];
       }
+    }
       textok[len-1]=Integer.toString(0);
       textok[len-2]=Integer.toString(0);
-    }
-    else{
-      textok[len-1]=Integer.toString(0);
-      textok[len-2]=Integer.toString(0);
-    }
+
     return textok;
     }
 
-    public static int plus(int i, int result, String[] text) {
+    public static int plus(int i, String[] text) {
     int numb1 = Integer.parseInt(text[i-1]);
     int numb2 = Integer.parseInt(text[i+1]);
-    result = numb1 + numb2;
-    return result;
+    return numb1 + numb2;
   }
-  public static int minus(int i, int result, String[] text) {
+  public static int minus(int i, String[] text) {
     int numb1 = Integer.parseInt(text[i - 1]);
     int numb2 = Integer.parseInt(text[i + 1]);
-    result = numb1 - numb2;
-    return result;
+    return numb1 - numb2;
   }
-
-  public static int mult(int i, int result, String[] text) {
+  public static int mult(int i, String[] text) {
     int numb1 = Integer.parseInt(text[i - 1]);
     int numb2 = Integer.parseInt(text[i + 1]);
-    result = numb1 * numb2;
-    return result;
+    return numb1 * numb2;
   }
-  public static int devo(int i, int result, String[] text) {
+  public static int devo(int i, String[] text) {
     int numb1 = Integer.parseInt(text[i - 1]);
     int numb2 = Integer.parseInt(text[i + 1]);
-    result = numb1 / numb2;
-    return result;
+    return numb1 / numb2;
   }
 
 
